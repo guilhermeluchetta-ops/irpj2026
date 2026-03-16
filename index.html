@@ -1009,6 +1009,9 @@ function buildSummary() {
     <tr><td>Documentos marcados</td><td>${checked.length ? checked.map(c => `<span class="tag">${c}</span>`).join('') : '—'}</td></tr>`;
 }
 
+// ── URL DO GOOGLE APPS SCRIPT ─────────────────────────────────────
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby5aIrKzRBgCUNlSK4BNsWGBctvQUTbSffC6Ul2bkwGARPFWTIa8mf1yvN3evd4ZEI3/exec';
+
 // ── NAVEGAÇÃO ─────────────────────────────────────────────────────
 function toggleConfirm() {
   confirmed = !confirmed;
@@ -1019,9 +1022,9 @@ function toggleConfirm() {
 function next() {
   if (cur === 1) {
     const nome = document.getElementById('nome').value.trim();
-    const cpf = document.getElementById('cpf').value.trim();
+    const cpf  = document.getElementById('cpf').value.trim();
     const email = document.getElementById('email').value.trim();
-    const tel = document.getElementById('tel').value.trim();
+    const tel  = document.getElementById('tel').value.trim();
     if (!nome || !cpf || !email || !tel) {
       alert('Por favor, preencha nome, CPF, e-mail e WhatsApp para continuar.');
       return;
@@ -1029,10 +1032,7 @@ function next() {
   }
   if (cur === 4) {
     if (!confirmed) { alert('Por favor, confirme a veracidade dos documentos antes de enviar.'); return; }
-    document.getElementById('ok-summary').innerHTML = buildSummary();
-    document.getElementById('sec4').classList.remove('active');
-    document.getElementById('sec-ok').classList.add('active');
-    document.getElementById('nav-bar').style.display = 'none';
+    enviarParaDrive();
     return;
   }
   if (cur === 3) {
@@ -1042,6 +1042,68 @@ function next() {
   cur++;
   document.getElementById('sec' + cur).classList.add('active');
   updateUI();
+}
+
+// ── ENVIO PARA O GOOGLE DRIVE ─────────────────────────────────────
+async function enviarParaDrive() {
+  const btn = document.getElementById('btn-next');
+  btn.disabled = true;
+  btn.textContent = 'Enviando... ⏳';
+
+  // Coleta dados do formulário
+  const nome  = document.getElementById('nome').value.trim();
+  const cpf   = document.getElementById('cpf').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const tel   = document.getElementById('tel').value.trim();
+  const dep   = document.getElementById('dep').value;
+  const ant   = document.getElementById('ant').value;
+  const obs   = document.getElementById('recado').value.trim();
+
+  const checklist = [...document.querySelectorAll('.check-item.checked .check-text')]
+    .map(e => e.childNodes[0].textContent.trim());
+
+  let restituicao = '';
+  if (tipoRest === 'pix') {
+    restituicao = `PIX (CPF): ${document.getElementById('pix-cpf').value}`;
+  } else if (tipoRest === 'conta') {
+    restituicao = `${document.getElementById('banco-busca').value} · Ag. ${document.getElementById('agencia').value} · Conta ${document.getElementById('conta').value}`;
+  }
+
+  // Converte arquivos para base64
+  const arquivosB64 = await Promise.all(files.map(f => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve({
+      nome: f.name,
+      tipo: f.type || 'application/octet-stream',
+      base64: reader.result.split(',')[1]
+    });
+    reader.onerror = reject;
+    reader.readAsDataURL(f);
+  })));
+
+  const payload = { nome, cpf, email, tel, dep, ant, checklist, arquivos: arquivosB64, restituicao, obs };
+
+  try {
+    const resp = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+    const json = await resp.json();
+
+    if (json.ok) {
+      // Sucesso — mostra tela final
+      document.getElementById('ok-summary').innerHTML = buildSummary();
+      document.getElementById('sec4').classList.remove('active');
+      document.getElementById('sec-ok').classList.add('active');
+      document.getElementById('nav-bar').style.display = 'none';
+    } else {
+      throw new Error(json.erro || 'Erro desconhecido');
+    }
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Enviar documentos ✓';
+    alert('Ocorreu um erro ao enviar. Verifique sua conexão e tente novamente.\n\nDetalhe: ' + err.message);
+  }
 }
 
 function back() {
