@@ -22,7 +22,6 @@
     --warning: #B05A00;
     --warning-light: #FDF2E6;
     --danger: #A0201A;
-    --danger-light: #FBE9E8;
     --serif: 'DM Serif Display', Georgia, serif;
     --sans: 'DM Sans', system-ui, sans-serif;
     --radius: 10px;
@@ -38,49 +37,100 @@
     padding: 2rem 1rem 4rem;
   }
 
-  .page-wrap { max-width: 680px; margin: 0 auto; }
+  .page-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+  }
 
   /* Header */
-  .page-header { text-align: center; padding: 2.5rem 2rem 2rem; margin-bottom: 1.5rem; }
-  .logo-header { display: block; margin: 0 auto 1.5rem; height: 77px; width: auto; object-fit: contain; }
+  .page-header {
+    text-align: center;
+    padding: 2.5rem 2rem 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .logo-header {
+    display: block;
+    margin: 0 auto 1.5rem;
+    height: 77px;
+    width: auto;
+    object-fit: contain;
+  }
   .badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: var(--accent-light); color: var(--accent);
-    font-size: 12px; font-weight: 500; padding: 5px 12px;
-    border-radius: 99px; border: 1px solid #C5D9EF; margin-bottom: 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 99px;
+    border: 1px solid #C5D9EF;
+    margin-bottom: 1.25rem;
   }
   .badge::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
   .page-header h1 {
-    font-family: var(--serif); font-size: clamp(28px, 5vw, 38px);
-    color: var(--text); line-height: 1.15; margin-bottom: .75rem; letter-spacing: -.02em;
+    font-family: var(--serif);
+    font-size: clamp(28px, 5vw, 38px);
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: .75rem;
+    letter-spacing: -.02em;
   }
   .page-header p { font-size: 15px; color: var(--muted); line-height: 1.6; }
 
   /* Card */
   .card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--radius-lg); box-shadow: var(--shadow);
-    overflow: hidden; margin-bottom: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 1.25rem;
   }
 
   /* Progress */
-  .progress-bar { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); background: #FAFAF8; }
-  .progress-steps { display: flex; align-items: center; gap: 0; margin-bottom: .5rem; }
+  .progress-bar {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: #FAFAF8;
+  }
+  .progress-steps {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: .5rem;
+  }
   .p-step {
-    flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    position: relative;
   }
   .p-step::after {
-    content: ''; position: absolute; top: 11px; left: 50%;
-    width: 100%; height: 2px; background: var(--border); z-index: 0; transition: background .4s;
+    content: '';
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+    z-index: 0;
+    transition: background .4s;
   }
   .p-step:last-child::after { display: none; }
   .p-step.done::after, .p-step.active::after { background: var(--accent); }
   .p-dot {
-    width: 22px; height: 22px; border-radius: 50%;
-    background: var(--bg); border: 2px solid var(--border);
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--border);
     display: flex; align-items: center; justify-content: center;
     font-size: 10px; font-weight: 500; color: var(--muted);
-    position: relative; z-index: 1; transition: all .3s;
+    position: relative; z-index: 1;
+    transition: all .3s;
   }
   .p-step.done .p-dot { background: var(--accent); border-color: var(--accent); color: #fff; }
   .p-step.active .p-dot { background: var(--surface); border-color: var(--accent); color: var(--accent); font-weight: 700; }
@@ -95,106 +145,162 @@
   @keyframes fadeSlide { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
   .sec-label {
-    font-size: 11px; font-weight: 500; color: var(--muted);
-    text-transform: uppercase; letter-spacing: .08em;
-    margin-bottom: 1.25rem; padding-bottom: .75rem;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 1.25rem;
+    padding-bottom: .75rem;
     border-bottom: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   /* Fields */
   .field { margin-bottom: 1.1rem; }
-  .field label { display: block; font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
   .field label .req { color: var(--danger); margin-left: 2px; }
   .field input, .field select, .field textarea {
-    width: 100%; padding: 10px 13px; border: 1px solid var(--border);
-    border-radius: var(--radius); font-size: 14px; font-family: var(--sans);
-    background: #FAFAF8; color: var(--text);
-    transition: border .15s, box-shadow .15s; appearance: none;
+    width: 100%;
+    padding: 10px 13px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-family: var(--sans);
+    background: #FAFAF8;
+    color: var(--text);
+    transition: border .15s, box-shadow .15s;
+    appearance: none;
   }
   .field input:focus, .field select:focus, .field textarea:focus {
-    outline: none; border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(26,86,160,.1); background: var(--surface);
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(26,86,160,.1);
+    background: var(--surface);
   }
-  /* Campo com erro */
-  .field input.erro, .field select.erro { border-color: var(--danger); background: var(--danger-light); }
-  .field input.erro:focus { box-shadow: 0 0 0 3px rgba(160,32,26,.1); }
-  .field .erro-msg { font-size: 11px; color: var(--danger); margin-top: 4px; display: none; }
-  .field input.erro ~ .erro-msg, .field .erro-msg.visivel { display: block; }
-
-  .field textarea { resize: vertical; min-height: 72px; font-size: 13px; }
+  .field textarea { resize: vertical; min-height: 72px; }
   .field .hint { font-size: 11px; color: var(--muted); margin-top: 5px; }
   .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
   /* Select arrow */
-  .field select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A7770' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 13px center; padding-right: 36px;
-  }
+  .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A7770' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 13px center; padding-right: 36px; }
 
-  /* Restituição */
-  .rest-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+  /* Restituição PIX/Conta */
+  .rest-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
   .rest-opt {
-    display: flex; align-items: center; gap: 10px; padding: 10px 13px;
-    border: 1.5px solid var(--border); border-radius: var(--radius);
-    cursor: pointer; transition: all .15s; background: #FAFAF8; user-select: none;
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all .15s;
+    background: #FAFAF8;
+    user-select: none;
   }
   .rest-opt:hover { border-color: var(--accent); background: var(--accent-light); }
   .rest-opt.selected { border-color: var(--accent); background: var(--accent-light); }
   .rest-radio {
-    width: 17px; height: 17px; min-width: 17px; border-radius: 50%;
-    border: 2px solid var(--border); transition: all .15s; position: relative;
+    width: 20px; height: 20px; min-width: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    transition: all .15s;
+    position: relative;
   }
   .rest-opt.selected .rest-radio { border-color: var(--accent); }
   .rest-opt.selected .rest-radio::after {
-    content: ''; position: absolute; top: 3px; left: 3px;
-    width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+    content: '';
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
   }
-  .rest-title { font-size: 13px; font-weight: 500; color: var(--text); }
+  .rest-title { font-size: 14px; font-weight: 500; color: var(--text); }
   .rest-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
   .rest-opt.selected .rest-sub { color: var(--accent-muted); }
 
   /* Banco autocomplete */
   .banco-wrap { position: relative; }
   .banco-dropdown {
-    display: none; position: absolute; top: 100%; left: 0; right: 0;
-    background: var(--surface); border: 1px solid var(--border); border-top: none;
-    border-radius: 0 0 var(--radius) var(--radius); max-height: 220px; overflow-y: auto;
-    z-index: 100; box-shadow: 0 4px 16px rgba(0,0,0,.08);
+    display: none;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 100;
+    box-shadow: 0 4px 16px rgba(0,0,0,.08);
   }
   .banco-dropdown.open { display: block; }
   .banco-opt {
-    padding: 10px 13px; font-size: 13px; cursor: pointer;
-    display: flex; align-items: center; gap: 10px;
-    border-bottom: 1px solid var(--border); transition: background .1s;
+    padding: 10px 13px;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+    transition: background .1s;
   }
   .banco-opt:last-child { border: none; }
   .banco-opt:hover, .banco-opt.ativo { background: var(--accent-light); }
   .banco-cod {
-    min-width: 36px; font-size: 11px; font-weight: 600; color: var(--accent);
-    background: var(--accent-light); border: 1px solid #C5D9EF;
-    border-radius: 4px; padding: 1px 6px; text-align: center; font-family: monospace;
+    min-width: 36px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-light);
+    border: 1px solid #C5D9EF;
+    border-radius: 4px;
+    padding: 1px 6px;
+    text-align: center;
+    font-family: monospace;
   }
   .banco-nome { color: var(--text); flex: 1; }
 
   /* Checklist */
   .check-section { margin-bottom: 1.5rem; }
   .check-heading {
-    font-size: 12px; font-weight: 500; color: var(--muted);
-    text-transform: uppercase; letter-spacing: .06em; margin-bottom: .6rem;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: .6rem;
   }
-  .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .check-item {
-    display: flex; align-items: flex-start; gap: 10px; padding: 12px 13px;
-    border: 1px solid var(--border); border-radius: var(--radius);
-    cursor: pointer; transition: all .15s; background: #FAFAF8; user-select: none;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 11px 13px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all .15s;
+    background: #FAFAF8;
+    user-select: none;
   }
   .check-item:hover { background: var(--accent-light); border-color: #C5D9EF; }
   .check-item.checked { background: var(--accent-light); border-color: var(--accent); }
   .cb {
-    width: 18px; height: 18px; min-width: 18px; border-radius: 5px;
-    border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center;
-    margin-top: 1px; transition: all .15s;
+    width: 18px; height: 18px; min-width: 18px;
+    border-radius: 5px;
+    border: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+    transition: all .15s;
   }
   .check-item.checked .cb { background: var(--accent); border-color: var(--accent); }
   .cb svg { display: none; }
@@ -205,40 +311,44 @@
 
   /* Upload */
   .upload-zone {
-    border: 1.5px dashed var(--border); border-radius: var(--radius-lg);
-    padding: 2rem 1.5rem; text-align: center; cursor: pointer;
-    transition: all .2s; background: #FAFAF8; margin-bottom: 1rem;
+    border: 1.5px dashed var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all .2s;
+    background: #FAFAF8;
+    margin-bottom: 1rem;
   }
   .upload-zone:hover, .upload-zone.drag { border-color: var(--accent); background: var(--accent-light); }
   .upload-icon { font-size: 32px; margin-bottom: .75rem; }
   .upload-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; color: var(--text); }
   .upload-sub { font-size: 12px; color: var(--muted); }
-  .upload-btn {
-    display: inline-block; margin-top: .75rem; padding: 7px 16px;
-    border: 1px solid var(--accent); border-radius: 99px; font-size: 12px; color: var(--accent); font-weight: 500;
-  }
+  .upload-btn { display: inline-block; margin-top: .75rem; padding: 7px 16px; border: 1px solid var(--accent); border-radius: 99px; font-size: 12px; color: var(--accent); font-weight: 500; }
   .file-list { margin-top: .5rem; }
   .file-item {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 9px 13px; border: 1px solid var(--border); border-radius: var(--radius);
-    margin-bottom: 6px; font-size: 13px; background: var(--surface); animation: fadeSlide .2s ease;
+    padding: 9px 13px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 6px;
+    font-size: 13px;
+    background: var(--surface);
+    animation: fadeSlide .2s ease;
   }
-  .file-item.erro-size { border-color: var(--danger); background: var(--danger-light); }
-  .file-name { display: flex; align-items: center; gap: 8px; color: var(--text); flex: 1; min-width: 0; }
-  .file-name span:nth-child(2) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .file-size { font-size: 11px; color: var(--muted); white-space: nowrap; }
-  .file-rm { color: var(--muted); cursor: pointer; font-size: 18px; line-height: 1; transition: color .15s; flex-shrink: 0; margin-left: 8px; }
+  .file-name { display: flex; align-items: center; gap: 8px; color: var(--text); }
+  .file-size { font-size: 11px; color: var(--muted); }
+  .file-rm { color: var(--muted); cursor: pointer; font-size: 18px; line-height: 1; transition: color .15s; }
   .file-rm:hover { color: var(--danger); }
   .upload-tip {
-    font-size: 12px; color: var(--muted); background: var(--warning-light);
-    border: 1px solid #EDCFA0; border-radius: var(--radius);
-    padding: 10px 13px; margin-top: .75rem; line-height: 1.5;
+    font-size: 12px; color: var(--muted);
+    background: var(--warning-light);
+    border: 1px solid #EDCFA0;
+    border-radius: var(--radius);
+    padding: 10px 13px;
+    margin-top: .75rem;
+    line-height: 1.5;
   }
-  .upload-total {
-    font-size: 12px; color: var(--muted); text-align: right;
-    margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border);
-  }
-  .upload-total.aviso { color: var(--warning); font-weight: 500; }
 
   /* Summary */
   .summary-table { width: 100%; font-size: 13px; border-collapse: collapse; margin-bottom: 1rem; }
@@ -247,17 +357,18 @@
   .summary-table td { padding: 9px 0; vertical-align: top; }
   .summary-table td:first-child { color: var(--muted); width: 38%; padding-right: 12px; }
   .summary-table td:last-child { font-weight: 500; }
-  .tag {
-    display: inline-block; padding: 2px 8px; border-radius: 99px;
-    font-size: 11px; background: var(--accent-light); color: var(--accent);
-    border: 1px solid #C5D9EF; margin: 2px;
-  }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 11px; background: var(--accent-light); color: var(--accent); border: 1px solid #C5D9EF; margin: 2px; }
 
-  /* Confirm */
+  /* Confirm check */
   .confirm-wrap {
-    display: flex; align-items: flex-start; gap: 10px; padding: 14px;
-    border: 1px solid var(--border); border-radius: var(--radius);
-    background: #FAFAF8; cursor: pointer; margin-top: .75rem; transition: all .15s;
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: #FAFAF8;
+    cursor: pointer;
+    margin-top: .75rem;
+    transition: all .15s;
   }
   .confirm-wrap:hover { border-color: var(--accent); }
   .confirm-wrap.checked { border-color: var(--accent); background: var(--accent-light); }
@@ -265,139 +376,102 @@
   .confirm-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
   .confirm-wrap.checked .confirm-text { color: var(--text); }
 
+  /* Textarea field in review */
+  .field textarea { font-size: 13px; }
+
   /* Nav */
   .nav {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 1rem 1.5rem; border-top: 1px solid var(--border); background: #FAFAF8;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border);
+    background: #FAFAF8;
   }
   .btn {
-    padding: 10px 22px; border-radius: 99px; font-size: 14px; font-family: var(--sans);
-    font-weight: 500; cursor: pointer; transition: all .15s;
-    border: 1px solid var(--border); background: transparent; color: var(--muted);
+    padding: 10px 22px;
+    border-radius: 99px;
+    font-size: 14px;
+    font-family: var(--sans);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .15s;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
   }
   .btn:hover { background: var(--bg); color: var(--text); }
-  .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
   .btn-primary:hover { background: #174D8E; border-color: #174D8E; }
   .btn:disabled { opacity: .35; cursor: not-allowed; pointer-events: none; }
   .btn-ghost { visibility: hidden; }
 
-  /* Loading overlay */
-  .loading-overlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(26,25,22,.55); backdrop-filter: blur(3px);
-    z-index: 999; align-items: center; justify-content: center; flex-direction: column; gap: 16px;
-  }
-  .loading-overlay.ativo { display: flex; }
-  .loading-spinner {
-    width: 48px; height: 48px; border: 4px solid rgba(255,255,255,.25);
-    border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite;
-  }
-  .loading-texto { color: #fff; font-size: 15px; font-weight: 500; }
-  .loading-sub { color: rgba(255,255,255,.7); font-size: 13px; margin-top: -8px; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
   /* Success */
   .success-wrap { padding: 2.5rem 1.5rem; text-align: center; }
   .success-icon {
-    width: 64px; height: 64px; background: var(--success-light); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; font-size: 28px;
-    margin: 0 auto 1.25rem; border: 2px solid #A8DBBF;
+    width: 64px; height: 64px;
+    background: var(--success-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 1.25rem;
+    border: 2px solid #A8DBBF;
   }
-  .success-wrap h2 { font-family: var(--serif); font-size: 26px; margin-bottom: .5rem; color: var(--text); }
+  .success-wrap h2 {
+    font-family: var(--serif);
+    font-size: 26px;
+    margin-bottom: .5rem;
+    color: var(--text);
+  }
   .success-wrap p { font-size: 14px; color: var(--muted); margin-bottom: 1.25rem; line-height: 1.6; }
+  .next-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 11px 22px;
+    background: var(--text);
+    color: #fff;
+    border-radius: 99px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: opacity .15s;
+    text-decoration: none;
+  }
+  .next-btn:hover { opacity: .85; }
 
-  /* Alert */
+  /* Alert info */
   .alert {
-    display: flex; gap: 10px; padding: 12px 14px; border-radius: var(--radius);
-    font-size: 13px; margin-bottom: 1.25rem; line-height: 1.55;
+    display: flex; gap: 10px;
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    margin-bottom: 1.25rem;
+    line-height: 1.55;
   }
   .alert.info { background: var(--accent-light); color: #1A3E6E; border: 1px solid #C5D9EF; }
   .alert.warn { background: var(--warning-light); color: var(--warning); border: 1px solid #EDCFA0; }
-  .alert.danger { background: var(--danger-light); color: var(--danger); border: 1px solid #F0B8B6; }
   .alert-icon { font-size: 15px; margin-top: 1px; flex-shrink: 0; }
 
   /* Footer */
-  .page-footer { text-align: center; font-size: 12px; color: var(--muted); margin-top: 1.5rem; opacity: .7; }
-
-  /* Pagamento */
-  .pay-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.25rem; }
-  .pay-opt {
-    display: flex; flex-direction: column; align-items: center; gap: 10px;
-    padding: 22px 16px; border: 1.5px solid var(--border); border-radius: var(--radius-lg);
-    cursor: pointer; transition: all .2s; background: #FAFAF8; text-align: center;
-    text-decoration: none; color: var(--text);
+  .page-footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 1.5rem;
+    opacity: .7;
   }
-  .pay-opt:hover { border-color: var(--accent); background: var(--accent-light); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(26,86,160,.12); }
-  .pay-opt.cartao { border-color: #C5D9EF; }
-  .pay-opt.pix-pay { border-color: #A8DBBF; }
-  .pay-opt.cartao:hover { border-color: var(--accent); }
-  .pay-opt.pix-pay:hover { border-color: var(--success); background: var(--success-light); }
-  .pay-icon { font-size: 36px; }
-  .pay-title { font-size: 15px; font-weight: 600; color: var(--text); }
-  .pay-sub { font-size: 12px; color: var(--muted); line-height: 1.4; }
-
-  /* Bloco PIX pagamento */
-  .pix-box {
-    background: var(--success-light); border: 1.5px solid #A8DBBF;
-    border-radius: var(--radius-lg); padding: 1.5rem; text-align: center; margin-bottom: 1.25rem;
-  }
-  .pix-box-titulo { font-size: 13px; color: var(--success); font-weight: 500; margin-bottom: .5rem; }
-  .pix-cnpj {
-    font-family: monospace; font-size: 22px; font-weight: 700;
-    color: var(--text); letter-spacing: .08em; margin-bottom: .75rem;
-  }
-  .pix-copy-btn {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 8px 18px; border-radius: 99px; border: 1.5px solid var(--success);
-    background: transparent; color: var(--success); font-size: 13px; font-weight: 500;
-    cursor: pointer; font-family: var(--sans); transition: all .15s;
-  }
-  .pix-copy-btn:hover { background: var(--success); color: #fff; }
-  .pix-copy-btn.copiado { background: var(--success); color: #fff; }
-  .pix-hint { font-size: 12px; color: var(--muted); margin-top: .75rem; line-height: 1.5; }
-
-  /* Comprovante upload */
-  .comp-zone {
-    border: 1.5px dashed #A8DBBF; border-radius: var(--radius-lg);
-    padding: 1.5rem; text-align: center; cursor: pointer;
-    transition: all .2s; background: var(--success-light); margin-bottom: .75rem;
-  }
-  .comp-zone:hover, .comp-zone.drag { border-color: var(--success); background: #D4EFDF; }
-  .comp-zone-icon { font-size: 28px; margin-bottom: .5rem; }
-  .comp-zone-title { font-size: 14px; font-weight: 500; color: var(--success); margin-bottom: 4px; }
-  .comp-zone-sub { font-size: 12px; color: var(--muted); }
-
-  /* Status pagamento cartão */
-  .pay-status {
-    display: flex; align-items: center; gap: 10px; padding: 14px 16px;
-    border-radius: var(--radius); border: 1px solid var(--border);
-    background: #FAFAF8; margin-bottom: 1rem; font-size: 13px;
-  }
-  .pay-status.aguardando { border-color: #EDCFA0; background: var(--warning-light); color: var(--warning); }
-  .pay-status.confirmado { border-color: #A8DBBF; background: var(--success-light); color: var(--success); }
-  .pay-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
-  .pay-dot.pulsa { animation: pulsa 1.2s ease-in-out infinite; }
-  @keyframes pulsa { 0%,100% { opacity:1; } 50% { opacity:.3; } }
 
   @media (max-width: 480px) {
     .row2 { grid-template-columns: 1fr; }
     .check-grid { grid-template-columns: 1fr; }
     .p-label { display: none; }
-    .rest-options { grid-template-columns: 1fr; }
-    .check-item { padding: 13px; }
-    .pay-options { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
-
-<!-- Loading overlay -->
-<div class="loading-overlay" id="loading-overlay">
-  <div class="loading-spinner"></div>
-  <div class="loading-texto">Enviando documentos...</div>
-  <div class="loading-sub" id="loading-sub">Aguarde, isso pode levar alguns instantes</div>
-</div>
-
 <div class="page-wrap">
 
   <header class="page-header">
@@ -412,11 +486,22 @@
     <!-- Progress -->
     <div class="progress-bar">
       <div class="progress-steps">
-        <div class="p-step active" id="ps1"><div class="p-dot">1</div><span class="p-label">Dados</span></div>
-        <div class="p-step" id="ps2"><div class="p-dot">2</div><span class="p-label">Checklist</span></div>
-        <div class="p-step" id="ps3"><div class="p-dot">3</div><span class="p-label">Arquivos</span></div>
-        <div class="p-step" id="ps4"><div class="p-dot">4</div><span class="p-label">Revisão</span></div>
-        <div class="p-step" id="ps5"><div class="p-dot">5</div><span class="p-label">Pagamento</span></div>
+        <div class="p-step active" id="ps1">
+          <div class="p-dot">1</div>
+          <span class="p-label">Dados</span>
+        </div>
+        <div class="p-step" id="ps2">
+          <div class="p-dot">2</div>
+          <span class="p-label">Checklist</span>
+        </div>
+        <div class="p-step" id="ps3">
+          <div class="p-dot">3</div>
+          <span class="p-label">Arquivos</span>
+        </div>
+        <div class="p-step" id="ps4">
+          <div class="p-dot">4</div>
+          <span class="p-label">Revisão</span>
+        </div>
       </div>
       <div class="progress-info" id="prog-info">Etapa 1 de 4</div>
     </div>
@@ -428,107 +513,31 @@
         <span class="alert-icon">ℹ️</span>
         Preencha exatamente como consta no seu CPF. Divergências podem levar à malha fina.
       </div>
-
       <div class="row2">
         <div class="field">
           <label>Nome completo <span class="req">*</span></label>
           <input type="text" id="nome" placeholder="Conforme consta no CPF" autocomplete="name">
-          <div class="erro-msg">Informe seu nome completo.</div>
         </div>
         <div class="field">
           <label>CPF <span class="req">*</span></label>
           <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14" oninput="maskCPF(this)">
-          <div class="erro-msg" id="cpf-erro">CPF inválido. Verifique os dígitos.</div>
         </div>
       </div>
-
       <div class="row2">
         <div class="field">
           <label>Data de nascimento <span class="req">*</span></label>
           <input type="date" id="nasc">
-          <div class="erro-msg">Informe sua data de nascimento.</div>
         </div>
         <div class="field">
           <label>WhatsApp <span class="req">*</span></label>
-          <input type="tel" id="tel" placeholder="(44) 99999-9999" maxlength="15" oninput="maskTel(this)">
-          <div class="erro-msg">Informe um WhatsApp válido com DDD.</div>
+          <input type="tel" id="tel" placeholder="(44) 99999-9999">
         </div>
       </div>
-
       <div class="field">
         <label>E-mail <span class="req">*</span></label>
         <input type="email" id="email" placeholder="seu@email.com" autocomplete="email">
-        <div class="erro-msg">Informe um e-mail válido.</div>
       </div>
-
-      <!-- ENDEREÇO -->
-      <div class="sec-label" style="margin-top:1.25rem">Endereço</div>
-
       <div class="row2">
-        <div class="field">
-          <label>CEP <span class="req">*</span></label>
-          <input type="text" id="cep" placeholder="00000-000" maxlength="9" oninput="maskCEP(this)">
-          <div class="erro-msg">Informe o CEP.</div>
-        </div>
-        <div class="field">
-          <label>Estado <span class="req">*</span></label>
-          <select id="estado">
-            <option value="">Selecione...</option>
-            <option value="AC">AC — Acre</option>
-            <option value="AL">AL — Alagoas</option>
-            <option value="AP">AP — Amapá</option>
-            <option value="AM">AM — Amazonas</option>
-            <option value="BA">BA — Bahia</option>
-            <option value="CE">CE — Ceará</option>
-            <option value="DF">DF — Distrito Federal</option>
-            <option value="ES">ES — Espírito Santo</option>
-            <option value="GO">GO — Goiás</option>
-            <option value="MA">MA — Maranhão</option>
-            <option value="MT">MT — Mato Grosso</option>
-            <option value="MS">MS — Mato Grosso do Sul</option>
-            <option value="MG">MG — Minas Gerais</option>
-            <option value="PA">PA — Pará</option>
-            <option value="PB">PB — Paraíba</option>
-            <option value="PR">PR — Paraná</option>
-            <option value="PE">PE — Pernambuco</option>
-            <option value="PI">PI — Piauí</option>
-            <option value="RJ">RJ — Rio de Janeiro</option>
-            <option value="RN">RN — Rio Grande do Norte</option>
-            <option value="RS">RS — Rio Grande do Sul</option>
-            <option value="RO">RO — Rondônia</option>
-            <option value="RR">RR — Roraima</option>
-            <option value="SC">SC — Santa Catarina</option>
-            <option value="SP">SP — São Paulo</option>
-            <option value="SE">SE — Sergipe</option>
-            <option value="TO">TO — Tocantins</option>
-          </select>
-          <div class="erro-msg">Selecione o estado.</div>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Cidade <span class="req">*</span></label>
-        <input type="text" id="cidade" placeholder="Ex: Umuarama">
-        <div class="erro-msg">Informe a cidade.</div>
-      </div>
-
-      <div class="row2">
-        <div class="field" style="flex:2">
-          <label>Endereço <span class="req">*</span></label>
-          <input type="text" id="endereco" placeholder="Rua, Av., Travessa...">
-          <div class="erro-msg">Informe o endereço.</div>
-        </div>
-        <div class="field" style="flex:0 0 90px">
-          <label>Número <span class="req">*</span></label>
-          <input type="text" id="numero" placeholder="Ex: 123" maxlength="10">
-          <div class="erro-msg">Informe.</div>
-        </div>
-      </div>
-
-      <div class="field">
-        <label>Complemento</label>
-        <input type="text" id="complemento" placeholder="Apto, Sala, Bloco... (opcional)">
-      </div>
         <div class="field">
           <label>Possui dependentes?</label>
           <select id="dep">
@@ -545,7 +554,6 @@
           </select>
         </div>
       </div>
-
       <!-- RESTITUIÇÃO -->
       <div class="field">
         <label>Como deseja receber a restituição? <span class="req">*</span></label>
@@ -565,14 +573,13 @@
             </div>
           </label>
         </div>
-        <div class="erro-msg" id="rest-erro" style="display:none">Selecione como deseja receber a restituição.</div>
       </div>
 
       <!-- PIX -->
       <div id="bloco-pix" style="display:none">
         <div class="field">
           <label>Chave PIX <span class="req">*</span></label>
-          <input type="text" id="pix-cpf" readonly style="background:#F0F4FA;color:var(--accent);font-weight:500">
+          <input type="text" id="pix-cpf" placeholder="Será preenchido com seu CPF" readonly style="background:#F0F4FA;color:var(--accent);font-weight:500">
           <div class="hint">A Receita Federal aceita somente PIX com chave CPF para restituição.</div>
         </div>
       </div>
@@ -586,18 +593,15 @@
             <div id="banco-dropdown" class="banco-dropdown"></div>
             <input type="hidden" id="banco-val">
           </div>
-          <div class="erro-msg" id="banco-erro">Selecione um banco da lista.</div>
         </div>
         <div class="row2">
           <div class="field">
             <label>Agência <span class="req">*</span></label>
-            <input type="text" id="agencia" placeholder="Ex: 1234" maxlength="10" oninput="this.value=this.value.replace(/\D/g,'')">
-            <div class="erro-msg">Informe o número da agência.</div>
+            <input type="text" id="agencia" placeholder="Ex: 1234">
           </div>
           <div class="field">
             <label>Conta (com dígito) <span class="req">*</span></label>
-            <input type="text" id="conta" placeholder="Ex: 56789-0" maxlength="20">
-            <div class="erro-msg">Informe o número da conta com dígito.</div>
+            <input type="text" id="conta" placeholder="Ex: 56789-0">
           </div>
         </div>
       </div>
@@ -696,17 +700,17 @@
       <div class="sec-label">Envio de documentos</div>
       <p style="font-size:13px;color:var(--muted);margin-bottom:1.25rem;line-height:1.6">Envie os PDFs ou fotos dos documentos que você marcou na etapa anterior. Pode selecionar vários arquivos de uma vez.</p>
 
-      <div class="upload-zone" id="drop-zone" onclick="document.getElementById('fi').click()">
+      <div class="upload-zone" id="drop-zone" onclick="document.getElementById('fi').click()"
+           ondragover="e=>e.preventDefault()" ondrop="handleDrop(event)" ondragenter="this.classList.add('drag')" ondragleave="this.classList.remove('drag')">
         <div class="upload-icon">📎</div>
         <div class="upload-title">Arraste os arquivos aqui</div>
         <div class="upload-sub">ou clique para selecionar do seu dispositivo</div>
         <div class="upload-btn">Selecionar arquivos</div>
-        <div class="upload-sub" style="margin-top:.5rem">PDF, JPG ou PNG · Máx. 20 MB por arquivo · Total recomendado até 80 MB</div>
+        <div class="upload-sub" style="margin-top:.5rem">PDF, JPG ou PNG · Até 20 MB por arquivo</div>
       </div>
       <input type="file" id="fi" multiple accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="addFiles(this)">
 
       <div class="file-list" id="file-list"></div>
-      <div class="upload-total" id="upload-total" style="display:none"></div>
 
       <div class="upload-tip">
         <strong>Dica:</strong> Renomeie os arquivos antes de enviar para facilitar a organização — ex: <em>informe_empresa.pdf</em>, <em>plano_saude_amil.pdf</em>. Se não conseguir enviar algum documento agora, anote na etapa anterior e envie por WhatsApp depois.
@@ -735,92 +739,13 @@
     <div class="section" id="sec-ok">
       <div class="success-wrap">
         <div class="success-icon">✅</div>
-        <h2>Tudo certo!</h2>
-        <p>Seus documentos foram recebidos e o pagamento confirmado.<br>Seu contador já foi notificado e iniciará a análise em breve.<br>Fique atento ao WhatsApp para eventuais solicitações adicionais.</p>
+        <h2>Documentos recebidos!</h2>
+        <p>Seu contador já foi notificado e iniciará a análise em breve.<br>Fique atento ao WhatsApp para eventuais solicitações adicionais.</p>
         <table class="summary-table" id="ok-summary" style="text-align:left;margin-bottom:1.5rem"></table>
         <div class="alert warn" style="text-align:left;margin-bottom:1.5rem">
           <span class="alert-icon">📅</span>
           Lembre-se: o prazo final para entrega da declaração é <strong>29 de maio de 2026</strong>. Envie documentos faltantes o quanto antes.
         </div>
-      </div>
-    </div>
-
-    <!-- ETAPA 5 — PAGAMENTO -->
-    <div class="section" id="sec5">
-      <div class="sec-label">Pagamento</div>
-      <div class="alert info">
-        <span class="alert-icon">💳</span>
-        Escolha a forma de pagamento do serviço. Após a confirmação, seu contador iniciará a análise dos documentos.
-      </div>
-
-      <!-- Opções -->
-      <div class="pay-options" id="pay-opcoes">
-        <div class="pay-opt cartao" onclick="abrirCartao()">
-          <div class="pay-icon">💳</div>
-          <div class="pay-title">Cartão de crédito</div>
-          <div class="pay-sub">À vista · Parcelamento disponível</div>
-        </div>
-        <div class="pay-opt pix-pay" onclick="abrirPixPag()">
-          <div class="pay-icon">⚡</div>
-          <div class="pay-title">PIX</div>
-          <div class="pay-sub">À vista · Aprovação imediata</div>
-        </div>
-      </div>
-
-      <!-- Status cartão (aparece após clicar) -->
-      <div id="bloco-cartao" style="display:none">
-        <div class="pay-status aguardando" id="cartao-status">
-          <div class="pay-dot pulsa"></div>
-          <span>Aguardando confirmação do pagamento no cartão...</span>
-        </div>
-        <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:1rem">
-          Uma nova aba foi aberta com a página de pagamento seguro. Após concluir o pagamento, a confirmação aparecerá automaticamente aqui.
-        </p>
-        <button class="btn" onclick="verificarPagamentoCartao()" style="font-size:13px;margin-bottom:.75rem">🔄 Verificar pagamento</button>
-        <br>
-        <button class="btn" onclick="resetarPagamento()" style="font-size:12px;color:var(--muted)">← Escolher outra forma</button>
-      </div>
-
-      <!-- Bloco PIX pagamento -->
-      <div id="bloco-pix-pag" style="display:none">
-        <div class="pix-box">
-          <div class="pix-box-titulo">Chave PIX (CNPJ)</div>
-          <div class="pix-cnpj">59.067.459/0001-55</div>
-          <button class="pix-copy-btn" id="pix-copy-btn" onclick="copiarPix()">
-            <span>📋</span> <span id="pix-copy-txt">Copiar chave</span>
-          </button>
-          <div class="pix-hint">
-            Transfira o valor combinado para esta chave e envie o comprovante abaixo.<br>
-            <strong>Favorecido:</strong> GL Luchetta Perícias
-          </div>
-        </div>
-
-        <div class="field">
-          <label>Comprovante de pagamento <span class="req">*</span></label>
-          <div class="comp-zone" id="comp-zone" onclick="document.getElementById('fi-comp').click()">
-            <div class="comp-zone-icon">🧾</div>
-            <div class="comp-zone-title">Anexar comprovante</div>
-            <div class="comp-zone-sub">Clique ou arraste o print / PDF do comprovante</div>
-          </div>
-          <input type="file" id="fi-comp" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="addComprovante(this)">
-          <div id="comp-preview" style="display:none">
-            <div class="file-item" style="border-color:#A8DBBF;background:var(--success-light)">
-              <div class="file-name">
-                <span>🧾</span>
-                <span id="comp-nome"></span>
-                <span class="file-size" id="comp-size"></span>
-              </div>
-              <span class="file-rm" onclick="removerComprovante()" title="Remover">×</span>
-            </div>
-          </div>
-          <div class="erro-msg" id="comp-erro">Anexe o comprovante de pagamento para continuar.</div>
-        </div>
-
-        <button class="btn btn-primary" style="width:100%;margin-top:.5rem" onclick="enviarComprovante()">
-          Confirmar pagamento via PIX ✓
-        </button>
-        <br><br>
-        <button class="btn" onclick="resetarPagamento()" style="font-size:12px;color:var(--muted)">← Escolhar outra forma</button>
       </div>
     </div>
 
@@ -838,18 +763,10 @@
 
 <script>
 let cur = 1;
-const total = 5;
+const total = 4;
 const files = [];
 let confirmed = false;
 let tipoRest = null;
-let comprovante = null;
-let pagamentoConfirmado = false;
-let checkPagamentoInterval = null;
-
-const MAX_FILE_MB = 20;
-const MAX_TOTAL_MB = 80;
-const ASAAS_LINK = 'https://www.asaas.com/c/f4t38tnbe1fs9ycm';
-const PIX_CHAVE = '59.067.459/0001-55';
 
 // ── LISTA DE BANCOS ──────────────────────────────────────────────
 const BANCOS = [
@@ -973,49 +890,17 @@ function maskCPF(el) {
   if (v.length > 7) v = v.slice(0,7) + '.' + v.slice(7);
   if (v.length > 11) v = v.slice(0,11) + '-' + v.slice(11);
   el.value = v.slice(0, 14);
-  el.classList.remove('erro');
+  // Sincroniza PIX
   if (tipoRest === 'pix') document.getElementById('pix-cpf').value = el.value;
 }
 
-// ── MÁSCARA TELEFONE ──────────────────────────────────────────────
-function maskTel(el) {
-  let v = el.value.replace(/\D/g, '');
-  if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
-  if (v.length > 10) v = v.slice(0,10) + '-' + v.slice(10);
-  el.value = v.slice(0, 15);
-  el.classList.remove('erro');
-}
-
-// ── MÁSCARA CEP ───────────────────────────────────────────────────
-function maskCEP(el) {
-  let v = el.value.replace(/\D/g, '');
-  if (v.length > 5) v = v.slice(0,5) + '-' + v.slice(5);
-  el.value = v.slice(0, 9);
-  el.classList.remove('erro');
-}
-function validarCPF(cpf) {
-  const s = cpf.replace(/\D/g, '');
-  if (s.length !== 11 || /^(\d)\1+$/.test(s)) return false;
-  let soma = 0;
-  for (let i = 0; i < 9; i++) soma += parseInt(s[i]) * (10 - i);
-  let r = (soma * 10) % 11;
-  if (r === 10 || r === 11) r = 0;
-  if (r !== parseInt(s[9])) return false;
-  soma = 0;
-  for (let i = 0; i < 10; i++) soma += parseInt(s[i]) * (11 - i);
-  r = (soma * 10) % 11;
-  if (r === 10 || r === 11) r = 0;
-  return r === parseInt(s[10]);
-}
-
-// ── RESTITUIÇÃO ───────────────────────────────────────────────────
+// ── RESTITUIÇÃO: PIX ou CONTA ─────────────────────────────────────
 function selectRest(tipo) {
   tipoRest = tipo;
   document.getElementById('opt-pix').classList.toggle('selected', tipo === 'pix');
   document.getElementById('opt-conta').classList.toggle('selected', tipo === 'conta');
   document.getElementById('bloco-pix').style.display = tipo === 'pix' ? 'block' : 'none';
   document.getElementById('bloco-conta').style.display = tipo === 'conta' ? 'block' : 'none';
-  document.getElementById('rest-erro').style.display = 'none';
   if (tipo === 'pix') {
     document.getElementById('pix-cpf').value = document.getElementById('cpf').value || '';
   }
@@ -1027,7 +912,6 @@ let idxAtivo = -1;
 
 function filtraBancos(q) {
   const dd = document.getElementById('banco-dropdown');
-  document.getElementById('banco-val').value = '';
   if (!q || q.length < 1) { dd.classList.remove('open'); dd.innerHTML = ''; return; }
   const termo = q.toLowerCase().trim();
   bancosVisiveis = BANCOS.filter(b =>
@@ -1050,7 +934,6 @@ function selecionaBanco(idx) {
   document.getElementById('banco-val').value = b.cod;
   document.getElementById('banco-dropdown').classList.remove('open');
   document.getElementById('banco-dropdown').innerHTML = '';
-  document.getElementById('banco-busca').classList.remove('erro');
 }
 
 // ── CHECKLIST ─────────────────────────────────────────────────────
@@ -1081,63 +964,28 @@ function handleDrop(e) {
 
 function renderFiles() {
   const el = document.getElementById('file-list');
-  const totalEl = document.getElementById('upload-total');
-  if (!files.length) { el.innerHTML = ''; totalEl.style.display = 'none'; return; }
-
-  const totalBytes = files.reduce((a, f) => a + f.size, 0);
-  const totalMB = totalBytes / (1024 * 1024);
-
-  el.innerHTML = files.map((f, i) => {
-    const sizeMB = f.size / (1024 * 1024);
-    const grande = sizeMB > MAX_FILE_MB;
-    return `
-    <div class="file-item${grande ? ' erro-size' : ''}">
+  if (!files.length) { el.innerHTML = ''; return; }
+  el.innerHTML = files.map((f, i) => `
+    <div class="file-item">
       <div class="file-name">
         <span>${f.type.includes('pdf') ? '📄' : '🖼️'}</span>
         <span>${f.name}</span>
-        <span class="file-size">${sizeMB >= 1 ? sizeMB.toFixed(1) + ' MB' : (f.size/1024).toFixed(0) + ' KB'}${grande ? ' ⚠️' : ''}</span>
+        <span class="file-size">${(f.size/1024).toFixed(0)} KB</span>
       </div>
       <span class="file-rm" onclick="removeFile(${i})" title="Remover">×</span>
-    </div>`;
-  }).join('');
-
-  const aviso = totalMB > MAX_TOTAL_MB;
-  totalEl.style.display = 'block';
-  totalEl.className = 'upload-total' + (aviso ? ' aviso' : '');
-  totalEl.textContent = `Total: ${totalMB.toFixed(1)} MB em ${files.length} arquivo(s)${aviso ? ' — Total muito grande, considere remover alguns arquivos.' : ''}`;
+    </div>`).join('');
 }
 
 function removeFile(i) { files.splice(i, 1); renderFiles(); }
 
-function totalMBOk() {
-  return files.reduce((a, f) => a + f.size, 0) / (1024 * 1024) <= MAX_TOTAL_MB;
-}
-
-function arquivosGrandes() {
-  return files.filter(f => f.size / (1024 * 1024) > MAX_FILE_MB).map(f => f.name);
-}
-
 // ── RESUMO ────────────────────────────────────────────────────────
 function buildSummary() {
   const nome = document.getElementById('nome').value || '—';
-  const cpf  = document.getElementById('cpf').value || '—';
-  const nasc = document.getElementById('nasc').value
-    ? new Date(document.getElementById('nasc').value + 'T12:00').toLocaleDateString('pt-BR') : '—';
+  const cpf = document.getElementById('cpf').value || '—';
   const email = document.getElementById('email').value || '—';
-  const tel   = document.getElementById('tel').value || '—';
-  const dep   = document.getElementById('dep').value === 'sim' ? 'Sim' : 'Não';
-  const ant   = { sim: 'Sim, tenho o arquivo', nao: 'Não / primeira vez', rec: 'Preciso recuperar' }[document.getElementById('ant').value];
-  const obs   = document.getElementById('obs').value.trim();
-
-  // Endereço
-  const cep       = document.getElementById('cep').value || '—';
-  const estado    = document.getElementById('estado').value || '—';
-  const cidade    = document.getElementById('cidade').value || '—';
-  const endereco  = document.getElementById('endereco').value || '—';
-  const numero    = document.getElementById('numero').value || '—';
-  const compl     = document.getElementById('complemento').value.trim();
-  const endFull   = `${endereco}, ${numero}${compl ? ', ' + compl : ''} — ${cidade}/${estado} · CEP ${cep}`;
-
+  const tel = document.getElementById('tel').value || '—';
+  const dep = document.getElementById('dep').value === 'sim' ? 'Sim' : 'Não';
+  const ant = { sim: 'Sim, tenho o arquivo', nao: 'Não / primeira vez', rec: 'Preciso recuperar' }[document.getElementById('ant').value];
   const checked = [...document.querySelectorAll('.check-item.checked .check-text')]
     .map(e => e.childNodes[0].textContent.trim());
   let restInfo = '—';
@@ -1152,126 +1000,44 @@ function buildSummary() {
   return `
     <tr><td>Nome</td><td>${nome}</td></tr>
     <tr><td>CPF</td><td>${cpf}</td></tr>
-    <tr><td>Nascimento</td><td>${nasc}</td></tr>
     <tr><td>E-mail</td><td>${email}</td></tr>
     <tr><td>WhatsApp</td><td>${tel}</td></tr>
-    <tr><td>Endereço</td><td>${endFull}</td></tr>
     <tr><td>Dependentes</td><td>${dep}</td></tr>
     <tr><td>Declaração anterior</td><td>${ant}</td></tr>
     <tr><td>Restituição</td><td>${restInfo}</td></tr>
     <tr><td>Arquivos enviados</td><td>${files.length} arquivo(s)</td></tr>
-    <tr><td>Docs. marcados</td><td>${checked.length ? checked.map(c => `<span class="tag">${c}</span>`).join('') : '—'}</td></tr>
-    ${obs ? `<tr><td>Observações</td><td>${obs}</td></tr>` : ''}`;
+    <tr><td>Documentos marcados</td><td>${checked.length ? checked.map(c => `<span class="tag">${c}</span>`).join('') : '—'}</td></tr>`;
 }
 
 // ── URL DO GOOGLE APPS SCRIPT ─────────────────────────────────────
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby5aIrKzRBgCUNlSK4BNsWGBctvQUTbSffC6Ul2bkwGARPFWTIa8mf1yvN3evd4ZEI3/exec';
 
-// ── TOGGLE CONFIRM ────────────────────────────────────────────────
+// ── NAVEGAÇÃO ─────────────────────────────────────────────────────
 function toggleConfirm() {
   confirmed = !confirmed;
   document.getElementById('confirm-wrap').classList.toggle('checked', confirmed);
   document.getElementById('confirm-cb').classList.toggle('checked', confirmed);
 }
 
-// ── VALIDAÇÃO ETAPA 1 ─────────────────────────────────────────────
-function validarEtapa1() {
-  let ok = true;
-
-  const nome = document.getElementById('nome');
-  if (!nome.value.trim()) { nome.classList.add('erro'); ok = false; } else nome.classList.remove('erro');
-
-  const cpf = document.getElementById('cpf');
-  const cpfOk = validarCPF(cpf.value);
-  if (!cpfOk) { cpf.classList.add('erro'); ok = false; } else cpf.classList.remove('erro');
-
-  const nasc = document.getElementById('nasc');
-  if (!nasc.value) { nasc.classList.add('erro'); ok = false; } else nasc.classList.remove('erro');
-
-  const tel = document.getElementById('tel');
-  const telDigits = tel.value.replace(/\D/g,'');
-  if (telDigits.length < 10) { tel.classList.add('erro'); ok = false; } else tel.classList.remove('erro');
-
-  const email = document.getElementById('email');
-  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
-  if (!emailOk) { email.classList.add('erro'); ok = false; } else email.classList.remove('erro');
-
-  if (!tipoRest) {
-    document.getElementById('rest-erro').style.display = 'block';
-    ok = false;
-  } else {
-    document.getElementById('rest-erro').style.display = 'none';
-  }
-
-  if (tipoRest === 'conta') {
-    const banco = document.getElementById('banco-val');
-    if (!banco.value) {
-      document.getElementById('banco-busca').classList.add('erro');
-      ok = false;
-    } else document.getElementById('banco-busca').classList.remove('erro');
-
-    const ag = document.getElementById('agencia');
-    if (!ag.value.trim()) { ag.classList.add('erro'); ok = false; } else ag.classList.remove('erro');
-
-    const ct = document.getElementById('conta');
-    if (!ct.value.trim()) { ct.classList.add('erro'); ok = false; } else ct.classList.remove('erro');
-  }
-
-  // Validação endereço
-  const cep = document.getElementById('cep');
-  if (cep.value.replace(/\D/g,'').length < 8) { cep.classList.add('erro'); ok = false; } else cep.classList.remove('erro');
-
-  const estado = document.getElementById('estado');
-  if (!estado.value) { estado.classList.add('erro'); ok = false; } else estado.classList.remove('erro');
-
-  const cidade = document.getElementById('cidade');
-  if (!cidade.value.trim()) { cidade.classList.add('erro'); ok = false; } else cidade.classList.remove('erro');
-
-  const endereco = document.getElementById('endereco');
-  if (!endereco.value.trim()) { endereco.classList.add('erro'); ok = false; } else endereco.classList.remove('erro');
-
-  const numero = document.getElementById('numero');
-  if (!numero.value.trim()) { numero.classList.add('erro'); ok = false; } else numero.classList.remove('erro');
-
-  if (!ok) {
-    // Scroll ao primeiro campo com erro
-    const primeiro = document.querySelector('.section.active .erro');
-    if (primeiro) primeiro.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-  return ok;
-}
-
-// ── NAVEGAÇÃO ─────────────────────────────────────────────────────
 function next() {
   if (cur === 1) {
-    if (!validarEtapa1()) return;
-  }
-
-  if (cur === 3) {
-    const grandes = arquivosGrandes();
-    if (grandes.length > 0) {
-      alert(`Os seguintes arquivos excedem o limite de ${MAX_FILE_MB} MB e precisam ser removidos:\n\n${grandes.join('\n')}`);
-      return;
-    }
-    if (!totalMBOk()) {
-      alert(`O total dos arquivos (${(files.reduce((a,f)=>a+f.size,0)/1024/1024).toFixed(1)} MB) excede o limite recomendado de ${MAX_TOTAL_MB} MB. Remova alguns arquivos antes de continuar.`);
+    const nome = document.getElementById('nome').value.trim();
+    const cpf  = document.getElementById('cpf').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const tel  = document.getElementById('tel').value.trim();
+    if (!nome || !cpf || !email || !tel) {
+      alert('Por favor, preencha nome, CPF, e-mail e WhatsApp para continuar.');
       return;
     }
   }
-
   if (cur === 4) {
     if (!confirmed) { alert('Por favor, confirme a veracidade dos documentos antes de enviar.'); return; }
     enviarParaDrive();
     return;
   }
-
-  // Etapa 5 não tem botão Próximo — pagamento controla o avanço
-  if (cur === 5) return;
-
   if (cur === 3) {
     document.getElementById('summary-table').innerHTML = buildSummary();
   }
-
   document.getElementById('sec' + cur).classList.remove('active');
   cur++;
   document.getElementById('sec' + cur).classList.add('active');
@@ -1280,26 +1046,18 @@ function next() {
 
 // ── ENVIO PARA O GOOGLE DRIVE ─────────────────────────────────────
 async function enviarParaDrive() {
-  // Mostrar overlay de loading
-  document.getElementById('loading-overlay').classList.add('ativo');
-  document.getElementById('btn-next').disabled = true;
+  const btn = document.getElementById('btn-next');
+  btn.disabled = true;
+  btn.textContent = 'Enviando... ⏳';
 
+  // Coleta dados do formulário
   const nome  = document.getElementById('nome').value.trim();
   const cpf   = document.getElementById('cpf').value.trim();
-  const nasc  = document.getElementById('nasc').value;
   const email = document.getElementById('email').value.trim();
   const tel   = document.getElementById('tel').value.trim();
   const dep   = document.getElementById('dep').value;
   const ant   = document.getElementById('ant').value;
-  const obs   = document.getElementById('obs').value.trim();
-  const recado = document.getElementById('recado').value.trim();
-
-  const cep        = document.getElementById('cep').value.trim();
-  const estado     = document.getElementById('estado').value;
-  const cidade     = document.getElementById('cidade').value.trim();
-  const endereco   = document.getElementById('endereco').value.trim();
-  const numero     = document.getElementById('numero').value.trim();
-  const complemento = document.getElementById('complemento').value.trim();
+  const obs   = document.getElementById('recado').value.trim();
 
   const checklist = [...document.querySelectorAll('.check-item.checked .check-text')]
     .map(e => e.childNodes[0].textContent.trim());
@@ -1311,48 +1069,39 @@ async function enviarParaDrive() {
     restituicao = `${document.getElementById('banco-busca').value} · Ag. ${document.getElementById('agencia').value} · Conta ${document.getElementById('conta').value}`;
   }
 
-  // Atualiza mensagem de loading conforme converte arquivos
-  const subEl = document.getElementById('loading-sub');
-  subEl.textContent = 'Preparando arquivos...';
+  // Converte arquivos para base64
+  const arquivosB64 = await Promise.all(files.map(f => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve({
+      nome: f.name,
+      tipo: f.type || 'application/octet-stream',
+      base64: reader.result.split(',')[1]
+    });
+    reader.onerror = reject;
+    reader.readAsDataURL(f);
+  })));
 
-  let arquivosB64 = [];
-  try {
-    arquivosB64 = await Promise.all(files.map((f, idx) => new Promise((resolve, reject) => {
-      subEl.textContent = `Processando arquivo ${idx + 1} de ${files.length}...`;
-      const reader = new FileReader();
-      reader.onload = () => resolve({ nome: f.name, tipo: f.type || 'application/octet-stream', base64: reader.result.split(',')[1] });
-      reader.onerror = reject;
-      reader.readAsDataURL(f);
-    })));
-  } catch (err) {
-    document.getElementById('loading-overlay').classList.remove('ativo');
-    document.getElementById('btn-next').disabled = false;
-    alert('Erro ao processar os arquivos. Tente novamente.\n\nDetalhe: ' + err.message);
-    return;
-  }
-
-  subEl.textContent = 'Enviando para o servidor...';
-
-  const payload = { nome, cpf, nasc, email, tel, dep, ant, cep, estado, cidade, endereco, numero, complemento, checklist, arquivos: arquivosB64, restituicao, obs: recado || obs };
+  const payload = { nome, cpf, email, tel, dep, ant, checklist, arquivos: arquivosB64, restituicao, obs };
 
   try {
-    const resp = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
+    const resp = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
     const json = await resp.json();
 
-    document.getElementById('loading-overlay').classList.remove('ativo');
-
     if (json.ok) {
-      // Avança para etapa de pagamento (etapa 5)
+      // Sucesso — mostra tela final
+      document.getElementById('ok-summary').innerHTML = buildSummary();
       document.getElementById('sec4').classList.remove('active');
-      cur = 5;
-      document.getElementById('sec5').classList.add('active');
-      updateUI();
+      document.getElementById('sec-ok').classList.add('active');
+      document.getElementById('nav-bar').style.display = 'none';
     } else {
       throw new Error(json.erro || 'Erro desconhecido');
     }
   } catch (err) {
-    document.getElementById('loading-overlay').classList.remove('ativo');
-    document.getElementById('btn-next').disabled = false;
+    btn.disabled = false;
+    btn.textContent = 'Enviar documentos ✓';
     alert('Ocorreu um erro ao enviar. Verifique sua conexão e tente novamente.\n\nDetalhe: ' + err.message);
   }
 }
@@ -1374,142 +1123,8 @@ function updateUI() {
   }
   document.getElementById('prog-info').textContent = `Etapa ${cur} de ${total}`;
   document.getElementById('btn-back').className = cur > 1 ? 'btn' : 'btn btn-ghost';
-  // Na etapa 5 (pagamento) esconde o botão Próximo — pagamento controla o avanço
-  const btnNext = document.getElementById('btn-next');
-  if (cur === 5) {
-    btnNext.style.display = 'none';
-  } else {
-    btnNext.style.display = '';
-    btnNext.textContent = cur === 4 ? 'Enviar documentos ✓' : 'Próximo →';
-    btnNext.disabled = false;
-  }
+  document.getElementById('btn-next').textContent = cur === 4 ? 'Enviar documentos ✓' : 'Próximo →';
   window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// ── PAGAMENTO — CARTÃO ────────────────────────────────────────────
-function abrirCartao() {
-  document.getElementById('pay-opcoes').style.display = 'none';
-  document.getElementById('bloco-cartao').style.display = 'block';
-  // Abre o link do Asaas em nova aba
-  window.open(ASAAS_LINK, '_blank');
-  // Inicia polling para verificar pagamento (a cada 10s)
-  if (checkPagamentoInterval) clearInterval(checkPagamentoInterval);
-  checkPagamentoInterval = setInterval(verificarPagamentoCartao, 10000);
-}
-
-async function verificarPagamentoCartao() {
-  // Consulta o Apps Script que por sua vez verifica o status no Asaas via webhook
-  try {
-    const cpf = document.getElementById('cpf').value.replace(/\D/g,'');
-    const resp = await fetch(SCRIPT_URL + '?action=verificarPagamento&cpf=' + cpf);
-    const json = await resp.json();
-    if (json.pago) {
-      clearInterval(checkPagamentoInterval);
-      confirmarPagamento('cartao');
-    }
-  } catch(e) {
-    // Silencioso — tenta novamente no próximo intervalo
-  }
-}
-
-function resetarPagamento() {
-  clearInterval(checkPagamentoInterval);
-  document.getElementById('pay-opcoes').style.display = '';
-  document.getElementById('bloco-cartao').style.display = 'none';
-  document.getElementById('bloco-pix-pag').style.display = 'none';
-}
-
-// ── PAGAMENTO — PIX ───────────────────────────────────────────────
-function abrirPixPag() {
-  document.getElementById('pay-opcoes').style.display = 'none';
-  document.getElementById('bloco-pix-pag').style.display = 'block';
-}
-
-function copiarPix() {
-  navigator.clipboard.writeText(PIX_CHAVE).then(() => {
-    const btn = document.getElementById('pix-copy-btn');
-    const txt = document.getElementById('pix-copy-txt');
-    btn.classList.add('copiado');
-    txt.textContent = 'Copiado!';
-    setTimeout(() => { btn.classList.remove('copiado'); txt.textContent = 'Copiar chave'; }, 2500);
-  }).catch(() => {
-    // Fallback para browsers que bloqueiam clipboard
-    const el = document.createElement('textarea');
-    el.value = PIX_CHAVE;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    document.getElementById('pix-copy-txt').textContent = 'Copiado!';
-    setTimeout(() => { document.getElementById('pix-copy-txt').textContent = 'Copiar chave'; }, 2500);
-  });
-}
-
-function addComprovante(input) {
-  const f = input.files[0];
-  if (!f) return;
-  comprovante = f;
-  document.getElementById('comp-zone').style.display = 'none';
-  document.getElementById('comp-preview').style.display = 'block';
-  document.getElementById('comp-nome').textContent = f.name;
-  const mb = f.size / (1024*1024);
-  document.getElementById('comp-size').textContent = mb >= 1 ? mb.toFixed(1) + ' MB' : (f.size/1024).toFixed(0) + ' KB';
-  document.getElementById('comp-erro').style.display = 'none';
-  input.value = '';
-}
-
-function removerComprovante() {
-  comprovante = null;
-  document.getElementById('comp-zone').style.display = 'block';
-  document.getElementById('comp-preview').style.display = 'none';
-}
-
-async function enviarComprovante() {
-  if (!comprovante) {
-    document.getElementById('comp-erro').style.display = 'block';
-    return;
-  }
-  document.getElementById('loading-overlay').classList.add('ativo');
-  document.getElementById('loading-sub').textContent = 'Enviando comprovante...';
-
-  try {
-    const base64 = await new Promise((res, rej) => {
-      const r = new FileReader();
-      r.onload = () => res(r.result.split(',')[1]);
-      r.onerror = rej;
-      r.readAsDataURL(comprovante);
-    });
-
-    const cpf = document.getElementById('cpf').value.trim();
-    const nome = document.getElementById('nome').value.trim();
-    const payload = {
-      action: 'comprovantePix',
-      cpf, nome,
-      comprovante: { nome: comprovante.name, tipo: comprovante.type || 'image/jpeg', base64 }
-    };
-
-    const resp = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
-    const json = await resp.json();
-    document.getElementById('loading-overlay').classList.remove('ativo');
-
-    if (json.ok) {
-      confirmarPagamento('pix');
-    } else {
-      throw new Error(json.erro || 'Erro desconhecido');
-    }
-  } catch(err) {
-    document.getElementById('loading-overlay').classList.remove('ativo');
-    alert('Erro ao enviar comprovante. Tente novamente.\n\nDetalhe: ' + err.message);
-  }
-}
-
-function confirmarPagamento(metodo) {
-  pagamentoConfirmado = true;
-  document.getElementById('ok-summary').innerHTML = buildSummary() +
-    `<tr><td>Pagamento</td><td>${metodo === 'pix' ? '✅ PIX — comprovante enviado' : '✅ Cartão de crédito'}</td></tr>`;
-  document.getElementById('sec5').classList.remove('active');
-  document.getElementById('sec-ok').classList.add('active');
-  document.getElementById('nav-bar').style.display = 'none';
 }
 
 // ── INIT ──────────────────────────────────────────────────────────
@@ -1534,12 +1149,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!e.target.closest('.banco-wrap')) {
       document.getElementById('banco-dropdown')?.classList.remove('open');
     }
-  });
-
-  // Remove classe de erro ao digitar em qualquer campo
-  document.querySelectorAll('input, select').forEach(el => {
-    el.addEventListener('input', () => el.classList.remove('erro'));
-    el.addEventListener('change', () => el.classList.remove('erro'));
   });
 });
 </script>
