@@ -861,6 +861,8 @@ let pagamentoConfirmado = false;
 let checkPagamentoInterval = null;
 let pollAttempts = 0;
 let pollFailures = 0;
+let isPolling = false;
+let pixCopyTimer = null;
 const MAX_POLL_ATTEMPTS = 60; // 60 × 10s = 10 minutos
 const MAX_POLL_FAILURES = 3;
 
@@ -1058,8 +1060,8 @@ function filtraBancos(q) {
   }
   dd.innerHTML = bancosVisiveis.map((b, i) =>
     `<div class="banco-opt" data-idx="${i}" onmousedown="selecionaBanco(${i})">
-      <span class="banco-cod">${b.cod}</span>
-      <span class="banco-nome">${b.nome}</span>
+      <span class="banco-cod">${sanitize(b.cod)}</span>
+      <span class="banco-nome">${sanitize(b.nome)}</span>
     </div>`
   ).join('');
   idxAtivo = -1;
@@ -1360,8 +1362,12 @@ async function enviarParaDrive() {
 
   const payload = { nome, cpf, nasc, email, tel, dep, ant, cep, estado, cidade, endereco, numero, complemento, checklist, arquivos: arquivosB64, restituicao, obs: recado || obs };
 
+  const controller = new AbortController();
+  const uploadTimeout = setTimeout(() => controller.abort(), 30000);
+
   try {
-    const resp = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
+    const resp = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload), signal: controller.signal });
+    clearTimeout(uploadTimeout);
     const json = await resp.json();
 
     document.getElementById('loading-overlay').classList.remove('ativo');
@@ -1376,9 +1382,13 @@ async function enviarParaDrive() {
       throw new Error(json.erro || 'Erro desconhecido');
     }
   } catch (err) {
+    clearTimeout(uploadTimeout);
     document.getElementById('loading-overlay').classList.remove('ativo');
     document.getElementById('btn-next').disabled = false;
-    alert('Ocorreu um erro ao enviar. Verifique sua conexão e tente novamente.\n\nDetalhe: ' + err.message);
+    const msg = err.name === 'AbortError'
+      ? 'O envio demorou mais de 30 segundos. Verifique sua conexão e tente novamente.'
+      : 'Ocorreu um erro ao enviar. Verifique sua conexão e tente novamente.\n\nDetalhe: ' + err.message;
+    alert(msg);
   }
 }
 
@@ -1413,6 +1423,7 @@ function updateUI() {
 
 // ── PAGAMENTO — CARTÃO ────────────────────────────────────────────
 function abrirCartao() {
+  if (isPolling) return;
   document.getElementById('pay-opcoes').style.display = 'none';
   document.getElementById('bloco-cartao').style.display = 'block';
   // Abre o link do Asaas em nova aba
@@ -1421,6 +1432,7 @@ function abrirCartao() {
   if (checkPagamentoInterval) clearInterval(checkPagamentoInterval);
   pollAttempts = 0;
   pollFailures = 0;
+  isPolling = true;
   checkPagamentoInterval = setInterval(verificarPagamentoCartao, 10000);
 }
 
@@ -1428,16 +1440,18 @@ async function verificarPagamentoCartao() {
   pollAttempts++;
   if (pollAttempts > MAX_POLL_ATTEMPTS) {
     clearInterval(checkPagamentoInterval);
+    isPolling = false;
     alert('Não foi possível confirmar o pagamento automaticamente. Se você já pagou, envie o comprovante pelo WhatsApp para o seu contador.');
     return;
   }
   // Consulta o Apps Script que por sua vez verifica o status no Asaas via webhook
   try {
     const cpf = document.getElementById('cpf').value.replace(/\D/g,'');
-    const resp = await fetch(SCRIPT_URL + '?action=verificarPagamento&cpf=' + cpf);
+    const resp = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify({ action: 'verificarPagamento', cpf }) });
     const json = await resp.json();
     if (json.pago) {
       clearInterval(checkPagamentoInterval);
+      isPolling = false;
       confirmarPagamento('cartao');
     } else {
       pollFailures = 0; // resposta recebida com sucesso, zera falhas consecutivas
@@ -1446,6 +1460,7 @@ async function verificarPagamentoCartao() {
     pollFailures++;
     if (pollFailures >= MAX_POLL_FAILURES) {
       clearInterval(checkPagamentoInterval);
+      isPolling = false;
       alert('Erro ao verificar o status do pagamento. Verifique sua conexão e tente novamente, ou entre em contato com o seu contador.');
     }
   }
@@ -1453,6 +1468,7 @@ async function verificarPagamentoCartao() {
 
 function resetarPagamento() {
   clearInterval(checkPagamentoInterval);
+  isPolling = false;
   document.getElementById('pay-opcoes').style.display = '';
   document.getElementById('bloco-cartao').style.display = 'none';
   document.getElementById('bloco-pix-pag').style.display = 'none';
@@ -1470,7 +1486,8 @@ function copiarPix() {
     const txt = document.getElementById('pix-copy-txt');
     btn.classList.add('copiado');
     txt.textContent = 'Copiado!';
-    setTimeout(() => { btn.classList.remove('copiado'); txt.textContent = 'Copiar chave'; }, 2500);
+    clearTimeout(pixCopyTimer);
+    pixCopyTimer = setTimeout(() => { btn.classList.remove('copiado'); txt.textContent = 'Copiar chave'; }, 2500);
   }).catch(() => {
     // Fallback para browsers que bloqueiam clipboard
     const el = document.createElement('textarea');
