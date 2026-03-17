@@ -827,7 +827,7 @@
           Confirmar pagamento via PIX ✓
         </button>
         <br><br>
-        <button class="btn" onclick="resetarPagamento()" style="font-size:12px;color:var(--muted)">← Escolhar outra forma</button>
+        <button class="btn" onclick="resetarPagamento()" style="font-size:12px;color:var(--muted)">← Escolher outra forma</button>
       </div>
     </div>
 
@@ -844,6 +844,13 @@
 </div>
 
 <script>
+// ── SANITIZAÇÃO ───────────────────────────────────────────────────
+function sanitize(str) {
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
 let cur = 1;
 const total = 5;
 const files = [];
@@ -852,6 +859,10 @@ let tipoRest = null;
 let comprovante = null;
 let pagamentoConfirmado = false;
 let checkPagamentoInterval = null;
+let pollAttempts = 0;
+let pollFailures = 0;
+const MAX_POLL_ATTEMPTS = 60; // 60 × 10s = 10 minutos
+const MAX_POLL_FAILURES = 3;
 
 const MAX_FILE_MB = 20;
 const MAX_TOTAL_MB = 80;
@@ -1040,7 +1051,11 @@ function filtraBancos(q) {
   bancosVisiveis = BANCOS.filter(b =>
     b.cod.startsWith(termo) || b.nome.toLowerCase().includes(termo)
   ).slice(0, 12);
-  if (!bancosVisiveis.length) { dd.classList.remove('open'); dd.innerHTML = ''; return; }
+  if (!bancosVisiveis.length) {
+    dd.innerHTML = '<div class="banco-opt" style="color:var(--muted);cursor:default">Nenhum banco encontrado</div>';
+    dd.classList.add('open');
+    return;
+  }
   dd.innerHTML = bancosVisiveis.map((b, i) =>
     `<div class="banco-opt" data-idx="${i}" onmousedown="selecionaBanco(${i})">
       <span class="banco-cod">${b.cod}</span>
@@ -1157,18 +1172,18 @@ function buildSummary() {
     restInfo = `${bNome} · Ag. ${ag} · Conta ${ct}`;
   }
   return `
-    <tr><td>Nome</td><td>${nome}</td></tr>
-    <tr><td>CPF</td><td>${cpf}</td></tr>
-    <tr><td>Nascimento</td><td>${nasc}</td></tr>
-    <tr><td>E-mail</td><td>${email}</td></tr>
-    <tr><td>WhatsApp</td><td>${tel}</td></tr>
-    <tr><td>Endereço</td><td>${endFull}</td></tr>
-    <tr><td>Dependentes</td><td>${dep}</td></tr>
-    <tr><td>Declaração anterior</td><td>${ant}</td></tr>
-    <tr><td>Restituição</td><td>${restInfo}</td></tr>
+    <tr><td>Nome</td><td>${sanitize(nome)}</td></tr>
+    <tr><td>CPF</td><td>${sanitize(cpf)}</td></tr>
+    <tr><td>Nascimento</td><td>${sanitize(nasc)}</td></tr>
+    <tr><td>E-mail</td><td>${sanitize(email)}</td></tr>
+    <tr><td>WhatsApp</td><td>${sanitize(tel)}</td></tr>
+    <tr><td>Endereço</td><td>${sanitize(endFull)}</td></tr>
+    <tr><td>Dependentes</td><td>${sanitize(dep)}</td></tr>
+    <tr><td>Declaração anterior</td><td>${sanitize(ant)}</td></tr>
+    <tr><td>Restituição</td><td>${sanitize(restInfo)}</td></tr>
     <tr><td>Arquivos enviados</td><td>${files.length} arquivo(s)</td></tr>
-    <tr><td>Docs. marcados</td><td>${checked.length ? checked.map(c => `<span class="tag">${c}</span>`).join('') : '—'}</td></tr>
-    ${obs ? `<tr><td>Observações</td><td>${obs}</td></tr>` : ''}`;
+    <tr><td>Docs. marcados</td><td>${checked.length ? checked.map(c => `<span class="tag">${sanitize(c)}</span>`).join('') : '—'}</td></tr>
+    ${obs ? `<tr><td>Observações</td><td>${sanitize(obs)}</td></tr>` : ''}`;
 }
 
 // ── URL DO GOOGLE APPS SCRIPT ─────────────────────────────────────
@@ -1404,10 +1419,18 @@ function abrirCartao() {
   window.open(ASAAS_LINK, '_blank');
   // Inicia polling para verificar pagamento (a cada 10s)
   if (checkPagamentoInterval) clearInterval(checkPagamentoInterval);
+  pollAttempts = 0;
+  pollFailures = 0;
   checkPagamentoInterval = setInterval(verificarPagamentoCartao, 10000);
 }
 
 async function verificarPagamentoCartao() {
+  pollAttempts++;
+  if (pollAttempts > MAX_POLL_ATTEMPTS) {
+    clearInterval(checkPagamentoInterval);
+    alert('Não foi possível confirmar o pagamento automaticamente. Se você já pagou, envie o comprovante pelo WhatsApp para o seu contador.');
+    return;
+  }
   // Consulta o Apps Script que por sua vez verifica o status no Asaas via webhook
   try {
     const cpf = document.getElementById('cpf').value.replace(/\D/g,'');
@@ -1416,9 +1439,15 @@ async function verificarPagamentoCartao() {
     if (json.pago) {
       clearInterval(checkPagamentoInterval);
       confirmarPagamento('cartao');
+    } else {
+      pollFailures = 0; // resposta recebida com sucesso, zera falhas consecutivas
     }
   } catch(e) {
-    // Silencioso — tenta novamente no próximo intervalo
+    pollFailures++;
+    if (pollFailures >= MAX_POLL_FAILURES) {
+      clearInterval(checkPagamentoInterval);
+      alert('Erro ao verificar o status do pagamento. Verifique sua conexão e tente novamente, ou entre em contato com o seu contador.');
+    }
   }
 }
 
